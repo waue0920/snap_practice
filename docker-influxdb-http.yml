@@ -1,0 +1,22 @@
+---
+  version: 1
+  schedule:
+    type: "simple"
+    interval: "5s"
+  max-failures: 1
+  workflow:
+    collect:
+      metrics:
+        /intel/docker/*/spec/*: {}
+        /intel/docker/*/stats/*: {}
+      publish:
+        - plugin_name: "influxdb"
+          config:
+             host: "165.124.33.139"
+             port: 8086
+             database: "snap"
+             user: "admin"
+             password: "admin"
+             scheme: http
+             skip-verify: false
+             isMultiFields: true
